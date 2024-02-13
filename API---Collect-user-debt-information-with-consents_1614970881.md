@@ -1,0 +1,617 @@
+<div id="page">
+  <div id="main" class="aui-page-panel">
+    <div id="main-header">
+      <h1 id="title-heading" class="pagetitle">
+                                    <span id="title-text">
+                Norsk Gjeldsinformasjon : API - Collect user debt information with consents
+            </span>
+      </h1>
+    </div>
+    <div id="content" class="view">
+      <div class="page-metadata">
+        <div id="main-content" class="wiki-content group">
+          <p>This service lets you:</p>
+          <ul>
+            <li><p>Ask user for consent to share unsecured debt information</p></li>
+            <li><p>Fetch information about a Norwegian citizens unsecured debt based on that
+              consent</p></li>
+          </ul>
+          <p>It uses a redirect-based flow which adheres to the common OAuth2.0 and OpenID Connect
+            standards.</p>
+          <p>The debt info is delivered on the same format as our debt query API, but since it is
+            provided with the end users consent, we also include the name of the creditors.</p>
+          <p/>
+          <ul class='toc-indentation'>
+            <li><a href='#API-Collectuserdebtinformationwithconsents-1-Gettingstarted'>1 - Getting
+              started</a>
+              <ul class='toc-indentation'>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-1.1-Introduction'>1.1 -
+                  Introduction</a></li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-1.2-Requirements'>1.2 -
+                  Requirements</a></li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-1.3-Testing'>1.3 -
+                  Testing</a></li>
+              </ul>
+            </li>
+            <li><a href='#API-Collectuserdebtinformationwithconsents-2.Coreconcepts'>2 . Core
+              concepts</a>
+              <ul class='toc-indentation'>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-2.1-OAuth2.0'>2.1 - OAuth
+                  2.0</a></li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-2.2-Accesstoken'>2.2 -
+                  Access token</a></li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-2.3-Flows'>2.3 - Flows</a>
+                  <ul class='toc-indentation'>
+                    <li><a
+                        href='#API-Collectuserdebtinformationwithconsents-2.3.1AuthorizationCodeFlow'>2.3.1
+                      Authorization Code Flow</a></li>
+                    <li><a
+                        href='#API-Collectuserdebtinformationwithconsents-2.3.2ClientCredentialsFlow'>2.3.2
+                      Client Credentials Flow</a></li>
+                  </ul>
+                </li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-2.4-Scopes'>2.4 -
+                  Scopes</a></li>
+                <li><a
+                    href='#API-Collectuserdebtinformationwithconsents-2.5-Consentswithanextendedduration'>2.5
+                  - Consents with an extended duration</a></li>
+              </ul>
+            </li>
+            <li><a href='#API-Collectuserdebtinformationwithconsents-3-Integration'>3 -
+              Integration</a>
+              <ul class='toc-indentation'>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-3.1-BaseUrls'>3.1 - Base
+                  Urls</a></li>
+                <li><a
+                    href='#API-Collectuserdebtinformationwithconsents-3.2-/.well-known/openid-configuration'>3.2
+                  - /.well-known/openid-configuration</a></li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-3.3-/oauth2/auth'>3.3 -
+                  /oauth2/auth</a></li>
+                <li><a href='#API-Collectuserdebtinformationwithconsents-3.4-/token'>3.4 -
+                  /token</a>
+                  <ul class='toc-indentation'>
+                    <li><a href='#API-Collectuserdebtinformationwithconsents-3.4.1-Authentication'>3.4.1
+                      - Authentication</a></li>
+                    <li><a
+                        href='#API-Collectuserdebtinformationwithconsents-3.4.2-AuthorizationCodeFlow'>3.4.2
+                      - Authorization Code Flow</a></li>
+                    <li><a
+                        href='#API-Collectuserdebtinformationwithconsents-3.4.3-ClientCredentialsFlow'>3.4.3
+                      - Client Credentials Flow</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href='#API-Collectuserdebtinformationwithconsents-4-CollectDebtInfoAPI'>4 -
+              Collect Debt Info API</a></li>
+          </ul>
+        </div>
+        <h2 id="API-Collectuserdebtinformationwithconsents-1-Gettingstarted">1 - Getting
+          started</h2>
+        <h3 id="API-Collectuserdebtinformationwithconsents-1.1-Introduction">1.1 - Introduction</h3>
+        <span
+            class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img
+            class="confluence-embedded-image image-center" width="760" loading="lazy"
+            src="attachments/1614970881/2382200835.png?width=760"
+            data-image-src="attachments/1614970881/2382200835.png" data-height="650"
+            data-width="1156" data-unresolved-comment-count="0" data-linked-resource-id="2382200835"
+            data-linked-resource-version="1" data-linked-resource-type="attachment"
+            data-linked-resource-default-alias="image-20231128-135317.png"
+            data-base-url="https://norskgjeld.atlassian.net/wiki"
+            data-linked-resource-content-type="image/png"
+            data-linked-resource-container-id="1614970881"
+            data-linked-resource-container-version="36"
+            data-media-id="4798e82f-1712-40e4-9be2-db7512404986" data-media-type="file"></span>
+        <p/>
+        <h3 id="API-Collectuserdebtinformationwithconsents-1.2-Requirements">1.2 - Requirements</h3>
+        <p>Before you can start using this service you have to enter into an agreement with Norsk
+          Gjeldsinfomasjon, this is handled by emailing us at <a class="external-link"
+                                                                 href="mailto:support@norskgjeld.no"
+                                                                 rel="nofollow"><u>support@norskgjeld.no</u></a>. 
+        </p>
+        <p>When you have signed an agreement, we will send your client id and client secret. You
+          must provide us with the URLs where you want to receive the callback after the consent
+          flow finishes. </p>
+        <p>This service does not require 2-way TLS, so client certificates (Virksomhetssertifikat,
+          SEID) are <strong>not</strong> required.</p>
+        <p>If you plan to run from a provider where you share multiple outbound IP-addresses (eg.
+          cloud providers), you should purchase fixed outbound IP-address(es).</p>
+        <h3 id="API-Collectuserdebtinformationwithconsents-1.3-Testing">1.3 - Testing</h3>
+        <p>Before you can start testing you will need a client with registered callback URIs and a
+          BankID test user. </p>
+        <p>This can be created at <a class="external-link"
+                                     href="https://ra-preprod.bankidnorge.no/#/generate"
+                                     rel="nofollow"><u>https://ra-preprod.bankidnorge.no/#/generate</u></a>.
+          Generate an SSN and set the BankID type to netcentric. When you use this BankID with
+          ID-porten for the first time, you will be asked if you want to add additional info which
+          you can skip.</p>
+        <p>In preprod (BankID TestBank) the one-time code is always &quot;otp&quot;, and the
+          password is &quot;qwer1234&quot;</p>
+        <p>Note: There will not be any loan information stored on the BankID test person you have
+          created in our test environment, so the debt API will not list any creditors. </p>
+        <p>Mocked debt data is available on several synthetic personal numbers:
+          <code>14842249091</code> and <code>29868099311</code></p>
+        <hr/>
+        <h2 id="API-Collectuserdebtinformationwithconsents-2.Coreconcepts">2 . Core concepts</h2>
+        <h3 id="API-Collectuserdebtinformationwithconsents-2.1-OAuth2.0">2.1 - OAuth 2.0</h3>
+        <p>OAuth 2.0 is the industry-standard protocol for authorization. Giving an introduction to
+          it is out of scope of this documentation, but there are a lot of good sources out there.
+          We recommend looking at the <a class="external-link" href="https://oauth.net/2/"
+                                         rel="nofollow">documentation</a>, and especially the list
+          of community resources.</p>
+        <h3 id="API-Collectuserdebtinformationwithconsents-2.2-Accesstoken">2.2 - Access token</h3>
+        <p>Access tokens are opaque strings that represents the authorization of a specific
+          application to access specific parts of a user’s data. There is no information encoded in
+          the token itself, but it can be used to collect debt information from the <a
+              href="1614741526.html" data-linked-resource-id="1614741526"
+              data-linked-resource-version="17" data-linked-resource-type="page">debt API</a>.
+          <strong>Access tokens are sensitive.</strong> It is important that they are stored
+          securely.</p>
+        <h3 id="API-Collectuserdebtinformationwithconsents-2.3-Flows">2.3 - Flows </h3>
+        <p>We are using two OAuth2.0 flows, Authorization Code and Client Credentials.</p><h4
+          id="API-Collectuserdebtinformationwithconsents-2.3.1AuthorizationCodeFlow">2.3.1
+        Authorization Code Flow</h4>
+        <p><a class="external-link" href="https://oauth.net/2/grant-types/authorization-code/"
+              rel="nofollow">Authorization Code flow</a> is used to authenticate a user and obtain a
+          consent to share their debt information. It is initiated by redirecting the users browser
+          to our /auth endpoint with the required parameters in the URL. </p><h4
+          id="API-Collectuserdebtinformationwithconsents-2.3.2ClientCredentialsFlow">2.3.2 Client
+        Credentials Flow</h4>
+        <p>The <a class="external-link" href="https://oauth.net/2/grant-types/client-credentials/"
+                  rel="nofollow">Client Credentials flow</a> is used to obtain an access token to
+          identify the client when collecting debt information with a consent which was granted for
+          an extended duration. </p>
+        <p>The access token received on this request is used in addition to the id of the consent
+          when querying the debt API.</p>
+        <h3 id="API-Collectuserdebtinformationwithconsents-2.4-Scopes">2.4 - Scopes</h3>
+        <p>Scopes are space-separated lists of identifiers used to specify what access privileges
+          are being requested.</p>
+        <p>Due to legal reasons a consent is required to have a specific purpose; you can therefore
+          only ask the user to consent to one scope at a time. </p>
+        <p>The scopes also contain the purpose of the consent, which can either be presentation of
+          debt information (gjeldsinformasjonen) - or credit processing.</p>
+        <p>This is done by supplying the corresponding scope when you initiate the flow, and the
+          request to /auth must therefore contain one and only one of the following scopes:</p>
+        <div class="table-wrap">
+          <table data-table-width="760" data-layout="default"
+                 data-local-id="665a77b0-ea6f-4be9-8a55-ab597da672c2" class="confluenceTable">
+            <colgroup>
+              <col style="width: 230.0px;"/>
+              <col style="width: 264.0px;"/>
+              <col style="width: 142.0px;"/>
+              <col style="width: 120.0px;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <td class="confluenceTd"><p><strong>Scope</strong></p></td>
+              <td class="confluenceTd"><p><strong>Intended use</strong></p></td>
+              <td class="confluenceTd"><p><strong>Default duration</strong></p></td>
+              <td class="confluenceTd"><p><strong>Max duration</strong></p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>debt.unsecured.presentation</p></td>
+              <td class="confluenceTd"><p>Solely for displaying the debt info</p></td>
+              <td class="confluenceTd"><p>10 min</p></td>
+              <td class="confluenceTd"><p>365 days</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>debt.unsecured.processing</p></td>
+              <td class="confluenceTd"><p>Credit processing, for example refinancing of existing
+                debt</p></td>
+              <td class="confluenceTd"><p>10 min</p></td>
+              <td class="confluenceTd"><p>28 days</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A default consent allows you to collect the debt info one time within 10 minutes. </p>
+        <div class="confluence-information-macro confluence-information-macro-information"><span
+            class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span>
+          <div class="confluence-information-macro-body"><p>See section 2.5 for consents with an
+            extended duration</p></div>
+        </div>
+        <p>OPTIONAL: </p>
+        <p>It is also possible to ask for the openid scope. This is used to contain the ssn and
+          consentID of the flow.</p>
+        <p>If you request the openid scope, it must be the last scope given in the request. <br/>Correct:
+          “debt.unsecured.presentation openid”.<br/>Incorrect: “openid debt.unsecured.presentation”
+        </p>
+        <div class="table-wrap">
+          <table data-table-width="760" data-layout="default"
+                 data-local-id="48c8c426-5c7b-462a-9158-88489d33270d" class="confluenceTable">
+            <colgroup>
+              <col style="width: 94.0px;"/>
+              <col style="width: 421.0px;"/>
+              <col style="width: 245.0px;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <td class="confluenceTd"><p><strong>Scope</strong></p></td>
+              <td class="confluenceTd"><p><strong>Intended use</strong></p></td>
+              <td class="confluenceTd"><p><strong>Description</strong></p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>openid</p></td>
+              <td class="confluenceTd"><p>Receive consentID and ssn securely for verifying correct
+                person has consented to share debt information.</p>
+                <p>Can be used to go directly to the Client Credentials Flow from the Authorization
+                  Code Flow by extracting the consentID from the ID Token.</p></td>
+              <td class="confluenceTd"><p>ID Token as a JWT-token with:<br/>”pid”: &lt;ssn&gt; <br/>and
+                <br/>”consent_id”: &lt;consentID&gt;</p>
+                <p>Note: The “sub” field should not be stored</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="API-Collectuserdebtinformationwithconsents-2.5-Consentswithanextendedduration">2.5 -
+          Consents with an extended duration</h3>
+        <p>It is possible to ask the user for a consent with an extended duration. This is done by
+          appending the requested duration of the consent <strong>in days</strong> after the scope.
+        </p>
+        <p>Starting the flow with the scope “debt.unsecured.presentation.365” would prompt the user
+          to consent to sharing their debt information for 365 days, which is the maximum duration
+          for this type of consent. Note that this is a way to specify duration. The scope name
+          displayed in redirect URLs will still be “debt.unsecured.presentation”.</p>
+        <p>The two scopes have different max numbers of days that you can request, and if provided a
+          number higher than this we will default to the boundary value.</p>
+        <p>It is possible to choose a shorter duration than the maximum duration if that is more
+          suitable for you, for example debt.unsecured.presentation.50 would prompt the user to
+          consent to sharing their debt information for 50 days.</p>
+        <p>The debt info can be collected any number of times using consents with an extended
+          duration, but keep in mind that users can log into <a class="external-link"
+                                                                href="http://www.norskgjeld.no"
+                                                                rel="nofollow">www.norskgjeld.no</a>
+          and see every single time their consent has been used to collect debt info.</p>
+        <h2 id="API-Collectuserdebtinformationwithconsents-3-Integration">3 - Integration</h2>
+        <p>The Consent API is compliant with the OAuth2.0 standard. We therefore strongly recommend
+          that you use a client library to perform this part of the integration.</p>
+        <p>A good place to start is to search <a class="external-link"
+                                                 href="https://openid.net/developers/certified/"
+                                                 rel="nofollow"><u>the list of clients certified by
+          the OpenID foundation</u></a> for a client written in your programming language.</p>
+        <h3 id="API-Collectuserdebtinformationwithconsents-3.1-BaseUrls">3.1 - Base Urls</h3>
+        <div class="table-wrap">
+          <table data-table-width="760" data-layout="default"
+                 data-local-id="158cd79e-8d3d-488f-81a6-e4fee63898be" class="confluenceTable">
+            <colgroup>
+              <col style="width: 473.0px;"/>
+              <col style="width: 287.0px;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <td class="confluenceTd"><p><strong>Environment</strong></p></td>
+              <td class="confluenceTd"><p><strong>Base URL</strong></p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>Preprod</p></td>
+              <td class="confluenceTd"><p>https://access-preprod.norskgjeld.no</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>Prod</p></td>
+              <td class="confluenceTd"><p>https://access.norskgjeld.no</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="API-Collectuserdebtinformationwithconsents-3.2-/.well-known/openid-configuration">
+          3.2 -  /.well-known/openid-configuration</h3>
+        <p>The OpenID-configuration returns metadata which can be used to configure you client
+          library.</p>
+        <p><em><strong>Example request</strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+            <pre class="syntaxhighlighter-pre"
+                 data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+                 data-theme="Confluence">GET: https://access-preprod.norskgjeld.no/.well-known/openid-configuration</pre>
+          </div>
+        </div>
+        <p><em><strong>Example</strong></em> <em><strong>response</strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre"
+     data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+     data-theme="Confluence">{
+  &quot;issuer&quot;: &quot;https://access-preprod.norskgjeld.no/&quot;,
+  &quot;authorization_endpoint&quot;: &quot;https://access-preprod.norskgjeld.no/oauth2/auth&quot;,
+  &quot;token_endpoint&quot;: &quot;https://access-preprod.norskgjeld.no/oauth2/token&quot;,
+  &quot;jwks_uri&quot;: &quot;https://access-preprod.norskgjeld.no/.well-known/jwks.json&quot;,
+  &quot;subject_types_supported&quot;: [
+    &quot;pairwise&quot;
+  ],
+  &quot;response_types_supported&quot;: [
+    &quot;code&quot;
+  ],
+  &quot;claims_supported&quot;: [
+    &quot;sub&quot;
+  ],
+  &quot;grant_types_supported&quot;: [
+    &quot;authorization_code&quot;
+    &quot;client_credentials&quot;
+  ],
+  &quot;response_modes_supported&quot;: [
+    &quot;query&quot;,
+    &quot;fragment&quot;
+  ],
+  &quot;userinfo_endpoint&quot;: &quot;https://access-preprod.norskgjeld.no/userinfo&quot;,
+  &quot;scopes_supported&quot;: [
+    &quot;openid&quot;
+  ],
+  &quot;token_endpoint_auth_methods_supported&quot;: [
+    &quot;client_secret_basic&quot;
+  ],
+  &quot;userinfo_signing_alg_values_supported&quot;: [
+    &quot;none&quot;,
+    &quot;RS256&quot;
+  ],
+  &quot;id_token_signing_alg_values_supported&quot;: [
+    &quot;RS256&quot;
+  ],
+  &quot;request_parameter_supported&quot;: true,
+  &quot;request_uri_parameter_supported&quot;: true,
+  &quot;require_request_uri_registration&quot;: true,
+  &quot;claims_parameter_supported&quot;: false,
+  &quot;revocation_endpoint&quot;: &quot;https://access-preprod.norskgjeld.no/oauth2/revoke&quot;,
+  &quot;end_session_endpoint&quot;: &quot;https://access-preprod.norskgjeld.no/oauth2/sessions/logout&quot;,
+  &quot;request_object_signing_alg_values_supported&quot;: [
+    &quot;RS256&quot;,
+    &quot;none&quot;
+  ]
+}</pre>
+          </div>
+        </div>
+        <h3 id="API-Collectuserdebtinformationwithconsents-3.3-/oauth2/auth">3.3 - /oauth2/auth</h3>
+        <p>The auth endpoint is the starting point for the OAuth2.0 Authorization code flow. This
+          request authenticates the user and returns a code on the callback which can be exchanged
+          for an access token towards the /token endpoint. </p>
+        <p>It is important that you show the user some kind of confirmation that the consent has
+          been received on the callback. This could for example be a landing page if you intend to
+          redirect the user to another service.</p>
+        <div class="table-wrap">
+          <table data-table-width="760" data-layout="default"
+                 data-local-id="8639edb0-900e-49c7-99ab-70b78fca03b8" class="confluenceTable">
+            <colgroup>
+              <col style="width: 135.0px;"/>
+              <col style="width: 485.0px;"/>
+              <col style="width: 140.0px;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <td class="confluenceTd"><p><strong>Parameter</strong></p></td>
+              <td class="confluenceTd"><p><strong>Description</strong></p></td>
+              <td class="confluenceTd"><p><strong>Required</strong></p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>client_id</p></td>
+              <td class="confluenceTd"><p>client id received from Norsk Gjeldsinformasjon</p></td>
+              <td class="confluenceTd"><p>yes</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>response_type</p></td>
+              <td class="confluenceTd"><p>Must be set to &quot;code&quot;</p></td>
+              <td class="confluenceTd"><p>yes</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>scope</p></td>
+              <td class="confluenceTd"><p>Must contain one and only one debt-related scope. It may
+                optionally contain the “openid” scope</p></td>
+              <td class="confluenceTd"><p>yes</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>redirect_uri</p></td>
+              <td class="confluenceTd"><p>Whitelisted URI where the user will be redirected after
+                consenting</p></td>
+              <td class="confluenceTd"><p>yes</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>state</p></td>
+              <td class="confluenceTd"><p>This is mirrored back in the callback request. Should be
+                set to a random value for each request</p></td>
+              <td class="confluenceTd"><p>yes</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p/>
+        <p><em><strong>Example request:</strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+            <pre class="syntaxhighlighter-pre"
+                 data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+                 data-theme="Confluence">GET: https://access-preprod.norskgjeld.no/oauth2/auth?client_id=your_client_id_here&amp;response_type=code&amp;scope=debt.unsecured.presentation&amp;state=thisShouldBeARandomValue&amp;redirect_uri=https://api-eksempelbank.no/v1/callback</pre>
+          </div>
+        </div>
+        <p><em><strong>Example response:</strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre"
+     data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+     data-theme="Confluence">Success response:
+https://api-eksempelbank.no/v1/callback?code=wi-w8zIdwwBHggkHhSjR24wH8pN6MDqxdObTBDuzaZo.sciTzz9qgwMlGBZ6X0jYIDyib8MupoIp5gbIJBxnTCs&amp;scope=debt.unsecured.presentation&amp;state=thisShouldBeARandomValue</pre>
+            Error response:
+            https://api-eksempelbank.no/v1/callback?error=consent_denied&amp;error_description=&amp;state=thisShouldBeARandomValue</pre>
+          </div>
+        </div>
+        <div class="panel"
+             style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;">
+          <div class="panelContent" style="background-color: #EAE6FF;">
+            <p>The error code can be &quot;consent_denied&quot;, &quot;server_error&quot;, &quot;invalid_scopes&quot;
+              or &quot;login_cancelled&quot;</p>
+          </div>
+        </div>
+        <h3 id="API-Collectuserdebtinformationwithconsents-3.4-/token">3.4 - /token</h3>
+        <p>The token endpoint is used to obtain an access token which is used when collecting debt
+          information from the debt-API. This can either be completed with the code received on the
+          callback after the user has finished delivering their consent (Authorization Code Flow) ,
+          or the client can identify directly with their credentials to obtain an access token
+          directly (Client Credentials Flow). </p>
+        <p>Here is a <a class="external-link" href="https://www.postman.com/"
+                        rel="nofollow">Postman</a> collection that contain examples for these flows:
+          <a class="external-link" data-card-appearance="inline"
+             href="https://norskgjeld.atlassian.net/l/c/dJfNfbS0" rel="nofollow">https://norskgjeld.atlassian.net/l/c/dJfNfbS0</a>
+        </p><h4 id="API-Collectuserdebtinformationwithconsents-3.4.1-Authentication">3.4.1 -
+        Authentication</h4>
+        <p>When calling the token endpoint you have to identify yourself. This is done by supplying
+          your client id and client secret in the Authorization header using the <a
+              class="external-link"
+              href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#basic_authentication_scheme"
+              rel="nofollow"><u>Basic authentication scheme</u></a>.</p><h4
+          id="API-Collectuserdebtinformationwithconsents-3.4.2-AuthorizationCodeFlow">3.4.2 -
+        Authorization Code Flow</h4>
+        <p>When requesting an access token using authorization code flow the following parameters
+          have to be present in the body which should be of type
+          application/x-www-form-urlencoded</p>
+        <div class="table-wrap">
+          <table data-table-width="760" data-layout="default"
+                 data-local-id="eb2fd1e6-f278-4d26-8cab-70532b025f51" class="confluenceTable">
+            <colgroup>
+              <col style="width: 340.0px;"/>
+              <col style="width: 340.0px;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <td class="confluenceTd"><p><strong>Parameter</strong></p></td>
+              <td class="confluenceTd"><p><strong>Description</strong></p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>grant_type</p></td>
+              <td class="confluenceTd"><p>Must be set to “authorization_code”</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>client_id</p></td>
+              <td class="confluenceTd"><p>Client id received from Norsk Gjeldsinformasjon</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>redirect_uri</p></td>
+              <td class="confluenceTd"><p>Whitelisted URI where the user will be redirected after
+                consenting</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>code</p></td>
+              <td class="confluenceTd"><p>Authorization received on the authorization callback</p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><em><strong>Example request</strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+            <pre class="syntaxhighlighter-pre"
+                 data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+                 data-theme="Confluence">POST: https://access-preprod.norskgjeld.no/oauth2/token</pre>
+          </div>
+        </div>
+        <p>HEADERS and BODY as described above.</p>
+        <p>There is an example in the Postman collection ‘Tokens/Exchange Auth Code for Tokens’</p>
+        <p><em><strong>Example response </strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre"
+     data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+     data-theme="Confluence">{
+  &quot;access_token&quot;:&quot;YcvXKoiuOwnbJkxso2Oe6bhp2cXcoHdZ1pdgE_QpDww.cAu8_J51evXtBQxfTMzkRA414_mOla1zryE1e_-r-1k&quot;,
+  &quot;expires_in&quot;: 3599,
+  &quot;scope&quot;: &quot;debt.unsecured.presentation&quot;,
+  &quot;token_type&quot;: &quot;bearer&quot;
+}</pre>
+          </div>
+        </div>
+        <p/><h4 id="API-Collectuserdebtinformationwithconsents-3.4.3-ClientCredentialsFlow">3.4.3 -
+        Client Credentials Flow</h4>
+        <p>When requesting an access token using the client credential flow the following parameters
+          have to be present in the body which should be of type
+          application/x-www-form-urlencoded</p>
+        <div class="table-wrap">
+          <table data-table-width="760" data-layout="default"
+                 data-local-id="e3b0d4ad-923a-4206-bfe9-597394e5d2a3" class="confluenceTable">
+            <colgroup>
+              <col style="width: 340.0px;"/>
+              <col style="width: 340.0px;"/>
+            </colgroup>
+            <tbody>
+            <tr>
+              <td class="confluenceTd"><p><strong>Parameter</strong></p></td>
+              <td class="confluenceTd"><p><strong>Description</strong></p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>grant_type</p></td>
+              <td class="confluenceTd"><p>Must be set to “client_credentials”</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>audience</p></td>
+              <td class="confluenceTd"><p>Must be set to &quot;<a class="external-link"
+                                                                  href="https://api.norskgjeld.no/v1/debt"
+                                                                  rel="nofollow">https://api.norskgjeld.no/v1/debt</a>”
+                in prod and “<a href="#"
+                                rel="nofollow">https://api-preprod.norskgjeld.no/v1/debt”</a> in
+                preprod</p></td>
+            </tr>
+            <tr>
+              <td class="confluenceTd"><p>scope</p></td>
+              <td class="confluenceTd"><p>Must contain a space separated string with the scopes that
+                you are going to fetch debt information for. It should usually be set to: </p>
+                <div class="code panel pdl" style="border-width: 1px;">
+                  <div class="codeContent panelContent pdl">
+                    <pre class="syntaxhighlighter-pre"
+                         data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+                         data-theme="Confluence">debt.unsecured.presentation debt.unsecured.processing</pre>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><em><strong>Example request</strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+            <pre class="syntaxhighlighter-pre"
+                 data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+                 data-theme="Confluence">POST: https://access-preprod.norskgjeld.no/oauth2/token</pre>
+          </div>
+        </div>
+        <p>HEADERS and BODY as described above.</p>
+        <p>There is an example in the Postman collection ‘Tokens/Get Client Credential Token’</p>
+        <p><em><strong>Example response </strong></em></p>
+        <div class="code panel pdl" style="border-width: 1px;">
+          <div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre"
+     data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence"
+     data-theme="Confluence">{
+  &quot;access_token&quot;:&quot;C2EzneyuE2lEK8VBYZS7TxBUMF16Ns6gTuU5DybZbY.6pcF_rv3muje47_GDucYJrQZvDioc8O7oCmvKMZKHEg&quot;,
+  &quot;expires_in&quot;: 3599,
+  &quot;scope&quot;: &quot;debt.unsecured.presentation debt.unsecured.processing&quot;,
+  &quot;token_type&quot;: &quot;bearer&quot;
+} </pre>
+          </div>
+        </div>
+        <hr/>
+        <h2 id="API-Collectuserdebtinformationwithconsents-4-CollectDebtInfoAPI">4 - Collect Debt
+          Info API</h2>
+        <p>After you have received an access token from the Authorization server you can use it to
+          collect the debt information from the API which is documented <a href="1614741526.html"
+                                                                           data-linked-resource-id="1614741526"
+                                                                           data-linked-resource-version="17"
+                                                                           data-linked-resource-type="page">here</a>.
+        </p>
+        <p/>
+      </div>
+      <div class="pageSection group">
+        <div class="pageSectionHeader">
+          <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+        </div>
+        <div class="greybox" align="left">
+          <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+          <a href="attachments/1614970881/2382430211.png">image-20231128-135040.png</a> (image/png)
+          <br/>
+          <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+          <a href="attachments/1614970881/2382462982.png">image-20231128-135256.png</a> (image/png)
+          <br/>
+          <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+          <a href="attachments/1614970881/2382200835.png">image-20231128-135317.png</a> (image/png)
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
