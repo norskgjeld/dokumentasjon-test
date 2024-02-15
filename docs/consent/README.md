@@ -41,8 +41,7 @@ the end users consent, we also include the name of the creditors.
 # 1 - Getting started
 
 ## 1.1 - Introduction
-
-![](attachments/1614970881/2382200835.png?width=760)
+![Overview of the consent service major components!](../images/ConsentOverview.png "Consent overvie")
 
 ## 1.2 - Requirements
 
@@ -177,7 +176,7 @@ in [Create consent](openapi-redoc.html#tag/samtykke-avtale-controller/operation/
 api will return the NoGi generated consentId.
 
 You can then fetch debt by getting an access token using client credentials flow (
-see [3.4.3 - Client Credentials Flow](##343---client-credentials-flow)),
+see [3.4.3 - Client Credentials Flow](#343---client-credentials-flow)),
 and then fetch debt as described
 in [4 - Collect Debt Info API](#4---collect-debt-info-api)
 
@@ -202,13 +201,13 @@ The OpenID-configuration returns metadata which can be used to configure you cli
 
 _**Example request**_
 
-```java
+```
 GET:https://access-preprod.norskgjeld.no/.well-known/openid-configuration
 ```
 
 _**Example**_ _**response**_
 
-```java
+```json
 {
     "issuer":"https://access-preprod.norskgjeld.no/",
     "authorization_endpoint":"https://access-preprod.norskgjeld.no/oauth2/auth",
@@ -224,7 +223,7 @@ _**Example**_ _**response**_
     "sub"
     ],
     "grant_types_supported":[
-    "authorization_code"
+    "authorization_code",
     "client_credentials"
     ],
     "response_modes_supported":[
@@ -272,13 +271,13 @@ another service.
 
 _**Example request:**_
 
-```java
+```
 GET:https://access-preprod.norskgjeld.no/oauth2/auth?client_id=your_client_id_here&response_type=code&scope=debt.unsecured.presentation&state=thisShouldBeARandomValue&redirect_uri=https://api-eksempelbank.no/v1/callback
 ```
 
 _**Example response:**_
 
-```java
+```
 Success response:
 https://api-eksempelbank.no/v1/callback?code=wi-w8zIdwwBHggkHhSjR24wH8pN6MDqxdObTBDuzaZo.sciTzz9qgwMlGBZ6X0jYIDyib8MupoIp5gbIJBxnTCs&scope=debt.unsecured.presentation&state=thisShouldBeARandomValue
 
@@ -313,7 +312,7 @@ present in the body which should be of type application/x-www-form-urlencoded
 
 _**Example request**_
 
-```java
+```
 POST:https://access-preprod.norskgjeld.no/oauth2/token
 ```
 
@@ -323,7 +322,7 @@ There is an example in the Postman collection ‘Tokens/Exchange Auth Code for T
 
 _**Example response**_
 
-```java
+```json
 {
     "access_token":"YcvXKoiuOwnbJkxso2Oe6bhp2cXcoHdZ1pdgE_QpDww.cAu8_J51evXtBQxfTMzkRA414_mOla1zryE1e_-r-1k",
     "expires_in":3599,
@@ -341,7 +340,7 @@ present in the body which should be of type application/x-www-form-urlencoded
 
 _**Example request**_
 
-```java
+```
 POST:https://access-preprod.norskgjeld.no/oauth2/token
 ```
 
@@ -351,7 +350,7 @@ There is an example in the Postman collection ‘Tokens/Get Client Credential To
 
 _**Example response**_
 
-```java
+```json
 {
     "access_token":"C2EzneyuE2lEK8VBYZS7TxBUMF16Ns6gTuU5DybZbY.6pcF_rv3muje47_GDucYJrQZvDioc8O7oCmvKMZKHEg",
     "expires_in":3599,
