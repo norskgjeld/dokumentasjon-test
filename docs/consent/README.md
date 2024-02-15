@@ -8,29 +8,6 @@ It uses a redirect-based flow which adheres to the common OAuth2.0 and OpenID Co
 The debt info is delivered on the same format as our debt query API, but since it is provided with
 the end users consent, we also include the name of the creditors.
 
-* [1 - Getting started](#API-Collectuserdebtinformationwithconsents-1-Gettingstarted)
-    * [1.1 - Introduction](#API-Collectuserdebtinformationwithconsents-1.1-Introduction)
-    * [1.2 - Requirements](#API-Collectuserdebtinformationwithconsents-1.2-Requirements)
-    * [1.3 - Testing](#API-Collectuserdebtinformationwithconsents-1.3-Testing)
-* [2 . Core concepts](#API-Collectuserdebtinformationwithconsents-2.Coreconcepts)
-    * [2.1 - OAuth 2.0](#API-Collectuserdebtinformationwithconsents-2.1-OAuth2.0)
-    * [2.2 - Access token](#API-Collectuserdebtinformationwithconsents-2.2-Accesstoken)
-    * [2.3 - Flows](#API-Collectuserdebtinformationwithconsents-2.3-Flows)
-        * [2.3.1 Authorization Code Flow](#API-Collectuserdebtinformationwithconsents-2.3.1AuthorizationCodeFlow)
-        * [2.3.2 Client Credentials Flow](#API-Collectuserdebtinformationwithconsents-2.3.2ClientCredentialsFlow)
-    * [2.4 - Scopes](#API-Collectuserdebtinformationwithconsents-2.4-Scopes)
-    * [2.5 - Consents with an extended duration](#API-Collectuserdebtinformationwithconsents-2.5-Consentswithanextendedduration)
-    * [2.6 - Consents created and managed outside NoGi](#API-Collectuserdebtinformationwithconsents-2.5-Consentswithanextendedduration)
-* [3 - Integration](#API-Collectuserdebtinformationwithconsents-3-Integration)
-    * [3.1 - Base Urls](#API-Collectuserdebtinformationwithconsents-3.1-BaseUrls)
-    * [3.2 - /.well-known/openid-configuration](#API-Collectuserdebtinformationwithconsents-3.2-/.well-known/openid-configuration)
-    * [3.3 - /oauth2/auth](#API-Collectuserdebtinformationwithconsents-3.3-/oauth2/auth)
-    * [3.4 - /token](#API-Collectuserdebtinformationwithconsents-3.4-/token)
-        * [3.4.1 - Authentication](#API-Collectuserdebtinformationwithconsents-3.4.1-Authentication)
-        * [3.4.2 - Authorization Code Flow](#API-Collectuserdebtinformationwithconsents-3.4.2-AuthorizationCodeFlow)
-        * [3.4.3 - Client Credentials Flow](#API-Collectuserdebtinformationwithconsents-3.4.3-ClientCredentialsFlow)
-* [4 - Collect Debt Info API](#API-Collectuserdebtinformationwithconsents-4-CollectDebtInfoAPI)
-
 # 1 - Getting started
 
 ## 1.1 - Introduction
@@ -158,6 +135,7 @@ single time their consent has been used to collect debt info.
 
 ## 2.6 - Consents created and managed outside NoGi (e.g. in an online bank)
 
+![!](/docs/images/exclamationMark.png)
 **THIS IS A NEW FEATURE, AND THE APIS AND DOCUMENTATION WILL CHANGE!**
 
 Consents can also be captured and managed in your own system, and only "registered" in NoGi.
