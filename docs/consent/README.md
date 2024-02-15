@@ -8,6 +8,8 @@ It uses a redirect-based flow which adheres to the common OAuth2.0 and OpenID Co
 The debt info is delivered on the same format as our debt query API, but since it is provided with
 the end users consent, we also include the name of the creditors.
 
+{:toc}
+
 # 1 - Getting started
 
 ## 1.1 - Introduction
@@ -152,7 +154,7 @@ see [3.4.3 - Client Credentials Flow](#API-Collectuserdebtinformationwithconsent
 and then fetch debt as described
 in [4 - Collect Debt Info API](#API-Collectuserdebtinformationwithconsents-4-CollectDebtInfoAPI)
 
-See []() for a Python script to create a consent and then fetch the debt using this consent.
+See [create-agreementbased.py](create-agreementbased.py) for a Python script to create a consent and then fetch the debt using this consent.
 
 # 3 - Integration
 
