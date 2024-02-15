@@ -8,7 +8,35 @@ It uses a redirect-based flow which adheres to the common OAuth2.0 and OpenID Co
 The debt info is delivered on the same format as our debt query API, but since it is provided with
 the end users consent, we also include the name of the creditors.
 
-{:toc}
+<!-- Update by running ../../tools/gh-md-toc.sh --insert README.md -->
+<!--ts-->
+* [1 - Getting started](#1---getting-started)
+   * [1.1 - Introduction](#11---introduction)
+   * [1.2 - Requirements](#12---requirements)
+   * [1.3 - Testing](#13---testing)
+* [2 . Core concepts](#2--core-concepts)
+   * [2.1 - OAuth 2.0](#21---oauth-20)
+   * [2.2 - Access token](#22---access-token)
+   * [2.3 - Flows](#23---flows)
+      * [2.3.1 Authorization Code Flow](#231-authorization-code-flow)
+      * [2.3.2 Client Credentials Flow](#232-client-credentials-flow)
+   * [2.4 - Scopes](#24---scopes)
+   * [2.5 - Consents with an extended duration](#25---consents-with-an-extended-duration)
+   * [2.6 - Consents created and managed outside NoGi (e.g. in an online bank)](#26---consents-created-and-managed-outside-nogi-eg-in-an-online-bank)
+* [3 - Integration](#3---integration)
+   * [3.1 - Base Urls](#31---base-urls)
+   * [3.2 - /.well-known/openid-configuration](#32---well-knownopenid-configuration)
+   * [3.3 - /oauth2/auth](#33---oauth2auth)
+   * [3.4 - /token](#34---token)
+      * [3.4.1 - Authentication](#341---authentication)
+      * [3.4.2 - Authorization Code Flow](#342---authorization-code-flow)
+         * [3.4.3 - Client Credentials Flow](#343---client-credentials-flow)
+* [4 - Collect Debt Info API](#4---collect-debt-info-api)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: torstr, at: Thu Feb 15 16:14:46 CET 2024 -->
+
+<!--te-->
 
 # 1 - Getting started
 
@@ -20,7 +48,7 @@ the end users consent, we also include the name of the creditors.
 
 Before you can start using this service you have to enter into an agreement with Norsk
 Gjeldsinfomasjon, this is handled by emailing us
-at[support@norskgjeld.no](mailto:support@norskgjeld.no).
+at [support@norskgjeld.no](mailto:support@norskgjeld.no).
 
 When you have signed an agreement, we will send your client id and client secret. You must provide
 us with the URLs where you want to receive the callback after the consent flow finishes.
@@ -149,9 +177,9 @@ in [Create consent](openapi-redoc.html#tag/samtykke-avtale-controller/operation/
 api will return the NoGi generated consentId.
 
 You can then fetch debt by getting an access token using client credentials flow (
-see [3.4.3 - Client Credentials Flow](#API-Collectuserdebtinformationwithconsents-3.4.3-ClientCredentialsFlow)),
+see [3.4.3 - Client Credentials Flow](##343---client-credentials-flow)),
 and then fetch debt as described
-in [4 - Collect Debt Info API](#API-Collectuserdebtinformationwithconsents-4-CollectDebtInfoAPI)
+in [4 - Collect Debt Info API](#4---collect-debt-info-api)
 
 See [create-agreementbased.py](create-agreementbased.py) for a Python script to create a consent and then fetch the debt using this consent.
 
