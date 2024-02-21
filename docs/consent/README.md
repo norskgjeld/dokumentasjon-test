@@ -365,10 +365,7 @@ _**Example response**_
 
 # 4 - Collect Debt Info API
 
-After you have received an access token from the Authorization server 
-
-1. You can use it to collect the
+After you have received an access token from the Authorization server you can use it to collect the
 debt information from the API which is
 documented [here](https://norskgjeld.atlassian.net/wiki/spaces/GJEL/pages/1614741526/OpenAPI+%28Swagger%29+Documentation).
-1. You can use it to register new consent for an enduser in the API documented [here](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/samtykke-avtale-controller)
 
