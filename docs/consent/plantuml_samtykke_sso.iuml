@@ -1,3 +1,4 @@
+@startuml
 autonumber
 Tredjepart -> AuthServer: /auth?clientID&clientSecret
 activate AuthServer
@@ -7,3 +8,4 @@ Tredjepart -> SamtykkeSSO: create consent (Nin, AccessToken)
 activate SamtykkeSSO
 SamtykkeSSO -> Tredjepart: consentID
 deactivate SamtykkeSSO
+@enduml

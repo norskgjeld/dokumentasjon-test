@@ -166,6 +166,8 @@ single time their consent has been used to collect debt info.
 :exclamation:
 **THIS IS A NEW FEATURE, AND THE APIS AND DOCUMENTATION WILL CHANGE!**
 
+![Sequence diagram for consents created and managed outside NoGi](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/norskgjeld/dokumentasjon-test/plantuml/docs/consent/plantuml_samtykke_sso.iuml)
+
 Consents can also be captured and managed in your own system, and only "registered" in NoGi.
 In order to be able to use this feature, you must conform to the rules and regulations
 for this functionality, and sign an agreement up-front.
