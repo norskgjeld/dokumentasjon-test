@@ -171,9 +171,11 @@ In order to be able to use this feature, you must conform to the rules and regul
 for this functionality, and sign an agreement up-front.
 
 After you have gathered the consent from the enduser, you will register the consent (and its scope)
-at NoGi by using the api
-in [Create consent](openapi-redoc.html#tag/samtykke-avtale-controller/operation/createConsent). This
-api will return the NoGi generated consentId.
+at NoGi. Before you can register the new consent, you must first fetch new access token using [3.4.3 - Client Credentials Flow](#343---client-credentials-flow) with scope set to "consent.create". 
+
+The access token is then used to 
+call the [create consent endpoint](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/samtykke-avtale-controller/operation/createConsent)
+to register the consent from the enduser at NOGI. The `scope_of_consent`, described in [API documentation](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/samtykke-avtale-controller/operation/createConsent), is the same type of Scope described in [2.4 - Scopes](#24---scopes). This will return the NOGI generated consentId.
 
 You can then fetch debt by getting an access token using client credentials flow (
 see [3.4.3 - Client Credentials Flow](#343---client-credentials-flow)),
