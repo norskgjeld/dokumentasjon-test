@@ -50,7 +50,8 @@ Gjeldsinfomasjon, this is handled by emailing us
 at [support@norskgjeld.no](mailto:support@norskgjeld.no).
 
 When you have signed an agreement, we will send your client id and client secret. You must provide
-us with the URLs where you want to receive the callback after the consent flow finishes.
+us with the URLs where you want to receive the callback after the consent flow finishes. This is not required if you
+only intend to manage consents externally ([see section 2.6](#26---consents-created-and-managed-outside-nogi-eg-in-an-online-bank))
 
 This service does not require 2-way TLS, so client certificates (Virksomhetssertifikat, SEID) are *
 *not** required.
@@ -210,7 +211,14 @@ see [3.4.3 - Client Credentials Flow](#343---client-credentials-flow)),
 and then fetch debt as described
 in [4 - Collect Debt Info API](#4---collect-debt-info-api)
 
-See [create-agreementbased.py](create-agreementbased.py) for a Python script to create a consent and then fetch the debt using this consent.
+### Example implementation
+There is an example implementation in python of how to create and fetch debt using contract based consents here: [create-agreementbased.py](create-agreementbased.py). Remember to
+replace the values of the variables in the script:
+```python
+client_id = '<your-client-id>'
+client_secret = '<your-client-secret>'
+```
+with your own client information.
 
 # 3 - Integration
 
@@ -227,7 +235,7 @@ for a client written in your programming language.
 
 ## 3.2 - /.well-known/openid-configuration
 
-The OpenID-configuration returns metadata which can be used to configure you client library.
+The OpenID-configuration returns metadata which can be used to configure your client library.
 
 _**Example request**_
 
