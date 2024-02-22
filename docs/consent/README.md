@@ -173,7 +173,7 @@ single time their consent has been used to collect debt info.
 ```plantuml
 @startuml consentsCreatedOutSideNoGiSequence
 autonumber
-ThirdParty -> AuthServer: /auth?clientID&clientSecret \n(scope="consent.create)
+ThirdParty -> AuthServer: /auth?clientID&clientSecret \n(scope="consent.create")
 activate AuthServer
 AuthServer -> ThirdParty: AccessToken
 deactivate AuthServer
