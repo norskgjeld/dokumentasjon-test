@@ -50,7 +50,8 @@ Gjeldsinfomasjon, this is handled by emailing us
 at [support@norskgjeld.no](mailto:support@norskgjeld.no).
 
 When you have signed an agreement, we will send your client id and client secret. You must provide
-us with the URLs where you want to receive the callback after the consent flow finishes.
+us with the URLs where you want to receive the callback after the consent flow finishes. This is not required if you
+only intend to manage consents externally ([see section 2.6](#26---consents-created-and-managed-outside-nogi-eg-in-an-online-bank))
 
 This service does not require 2-way TLS, so client certificates (Virksomhetssertifikat, SEID) are *
 *not** required.
@@ -177,14 +178,47 @@ at NoGi. Before you can register the new consent, you must first fetch new acces
 
 The access token is then used to 
 call the [create consent endpoint](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/samtykke-avtale-controller/operation/createConsent)
-to register the consent from the enduser at NOGI. The `scope_of_consent`, described in [API documentation](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/samtykke-avtale-controller/operation/createConsent), is the same type of Scope described in [2.4 - Scopes](#24---scopes). This will return the NOGI generated consentId.
+to register the consent from the enduser at NOGI. The `scope_of_consent`, described in [API documentation](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/samtykke-avtale-controller/operation/createConsent), is the same type of Scope described in [2.4 - Scopes](#24---scopes). This will return the NOGI generated consentId (`consent.id` in response). 
+
+
+_**Example request**_
+
+```http
+POST https://access-preprod.norskgjeld.no/v1/consent/agreement
+{
+  "nin": "12829499914",
+  "scope_of_consent": "debt.unsecured.presentation",
+  "consent_duration_days": 100,
+  "our_consent_id": "e91fcf4c-cfbd-4d59-91e3-71da7a498cac"
+}
+```
+
+_**Example response**_
+
+```json
+{
+  "our_consent_id": "e91fcf4c-cfbd-4d59-91e3-71da7a498cac",
+  "consent": {
+    "id": "0dcec3d5-6844-4d2c-b972-83086064b111",
+    "expires_at": "2018-01-10T06:14:00Z",
+    "scope_of_consent": "debt.unsecured.presentation"
+  }
+}
+```
 
 You can then fetch debt by getting an access token using client credentials flow (
 see [3.4.3 - Client Credentials Flow](#343---client-credentials-flow)),
 and then fetch debt as described
 in [4 - Collect Debt Info API](#4---collect-debt-info-api)
 
-See [create-agreementbased.py](create-agreementbased.py) for a Python script to create a consent and then fetch the debt using this consent.
+### Example implementation
+There is an example implementation in python of how to create and fetch debt using contract based consents here: [create-agreementbased.py](create-agreementbased.py). Remember to
+replace the values of the variables in the script:
+```python
+client_id = '<your-client-id>'
+client_secret = '<your-client-secret>'
+```
+with your own client information.
 
 # 3 - Integration
 
@@ -201,7 +235,7 @@ for a client written in your programming language.
 
 ## 3.2 - /.well-known/openid-configuration
 
-The OpenID-configuration returns metadata which can be used to configure you client library.
+The OpenID-configuration returns metadata which can be used to configure your client library.
 
 _**Example request**_
 
@@ -218,35 +252,35 @@ _**Example**_ _**response**_
     "token_endpoint":"https://access-preprod.norskgjeld.no/oauth2/token",
     "jwks_uri":"https://access-preprod.norskgjeld.no/.well-known/jwks.json",
     "subject_types_supported":[
-    "pairwise"
+      "pairwise"
     ],
     "response_types_supported":[
-    "code"
+      "code"
     ],
     "claims_supported":[
-    "sub"
+      "sub"
     ],
     "grant_types_supported":[
-    "authorization_code",
-    "client_credentials"
+      "authorization_code",
+      "client_credentials"
     ],
     "response_modes_supported":[
-    "query",
-    "fragment"
+      "query",
+      "fragment"
     ],
     "userinfo_endpoint":"https://access-preprod.norskgjeld.no/userinfo",
     "scopes_supported":[
-    "openid"
+      "openid"
     ],
     "token_endpoint_auth_methods_supported":[
-    "client_secret_basic"
+      "client_secret_basic"
     ],
     "userinfo_signing_alg_values_supported":[
-    "none",
-    "RS256"
+      "none",
+      "RS256"
     ],
     "id_token_signing_alg_values_supported":[
-    "RS256"
+      "RS256"
     ],
     "request_parameter_supported":true,
     "request_uri_parameter_supported":true,
@@ -255,10 +289,10 @@ _**Example**_ _**response**_
     "revocation_endpoint":"https://access-preprod.norskgjeld.no/oauth2/revoke",
     "end_session_endpoint":"https://access-preprod.norskgjeld.no/oauth2/sessions/logout",
     "request_object_signing_alg_values_supported":[
-    "RS256",
-    "none"
+      "RS256",
+      "none"
     ]
-    }
+}
 ```
 
 ## 3.3 - /oauth2/auth
@@ -367,5 +401,5 @@ _**Example response**_
 
 After you have received an access token from the Authorization server you can use it to collect the
 debt information from the API which is
-documented [here](https://norskgjeld.atlassian.net/wiki/spaces/GJEL/pages/1614741526/OpenAPI+%28Swagger%29+Documentation).
+documented [here](https://norskgjeld.github.io/dokumentasjon-test/consent/openapi-redoc.html#tag/Debt-Api).
 
